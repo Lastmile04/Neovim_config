@@ -7,5 +7,3 @@ require('config.lazy')
 
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 10
-vim.g.catppuccin_flavour = "mocha"
-vim.cmd.colorscheme("catppuccin")
