@@ -92,7 +92,7 @@ return {
         if has_cmp then
             caps = cmp_nvim_lsp.default_capabilities(caps)
         end
-        vim.lsp.config['luals'] = {
+        vim.lsp.config['lua_ls'] = {
             cmd = { 'lua-language-server' },
             filetypes = { 'lua' },
             root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },

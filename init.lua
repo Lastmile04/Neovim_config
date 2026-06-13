@@ -7,3 +7,5 @@ require('config.lazy')
 
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 10
+
+vim.opt.clipboard = 'unnamedplus'

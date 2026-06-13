@@ -15,7 +15,8 @@ opt.scrolloff = 10
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.tabstop = 4
-opt.smartindent = true
+opt.smartindent = false
+opt.autoindent = true
 
 -- --- Search ---
 opt.ignorecase = true

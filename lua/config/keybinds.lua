@@ -24,3 +24,8 @@ vim.keymap.set("n", "<leader>cr", function()
 end)
 
 vim.keymap.set("n", "<leader>i", "mzgg=G`z", { desc = "Auto indent file (keep cursor)" })
+
+vim.keymap.set({ "n", "v" }, "p", '"+p', { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "P", '"+P', { noremap = true, silent = true })
+
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
