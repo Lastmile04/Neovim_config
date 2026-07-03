@@ -34,5 +34,5 @@ opt.splitbelow = true
 -- Add this to your options.lua or an autocmd file
 vim.api.nvim_create_autocmd("FocusLost", {
     pattern = "*",
-    command = "silent! wa"
+    command = "silent! noautocmd wa"
 })

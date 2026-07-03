@@ -1,4 +1,12 @@
 -- At the VERY TOP of lsp.lua, add:
+vim.g.autoformat_enabled = true
+
+-- Register the command globally right at the start so it's always accessible
+vim.api.nvim_create_user_command("ToggleFormat", function()
+    vim.g.autoformat_enabled = not vim.g.autoformat_enabled
+    print("Autoformat on save: " .. (vim.g.autoformat_enabled and "ENABLED" or "DISABLED"))
+end, {})
+
 return {
     "neovim/nvim-lspconfig",
     config = function()
@@ -56,6 +64,7 @@ return {
                 map('n', '<F2>', vim.lsp.buf.rename)
                 map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end)
                 map('n', '<F4>', vim.lsp.buf.code_action)
+                map('n', '<leader>t', '<cmd>ToggleFormat<CR>')
 
                 if client:supports_method('textDocument/documentHighlight') then
                     local highlight_augroup = vim.api.nvim_create_augroup('my.lsp.highlight', { clear = false })
@@ -80,7 +89,10 @@ return {
                         group = vim.api.nvim_create_augroup('my.lsp.format', { clear = false }),
                         buffer = buf,
                         callback = function()
-                            vim.lsp.buf.format({ bufnr = buf, id = client.id, timeout_ms = 1000 })
+                            -- Check the global state right before formatting executes
+                            if vim.g.autoformat_enabled then
+                                vim.lsp.buf.format({ bufnr = buf, id = client.id, timeout_ms = 1000 })
+                            end
                         end,
                     })
                 end
@@ -105,7 +117,7 @@ return {
                         checkThirdParty = false,
                         library = vim.list_extend(
                             vim.api.nvim_get_runtime_file('', true),
-                            {     -- '/home/tony/repos/oxwm/templates'
+                            { -- '/home/tony/repos/oxwm/templates'
                             }
                         ),
                     },
@@ -134,7 +146,7 @@ return {
             settings = {
                 intelephense = {
                     files = {
-                        maxSize = 5000000,     -- default 5MB
+                        maxSize = 5000000, -- default 5MB
                     },
                 },
             },
@@ -213,7 +225,7 @@ return {
             root_markers = { 'compile_commands.json', '.clangd', 'configure.ac', 'Makefile', '.git' },
             capabilities = caps,
             init_options = {
-                fallbackFlags = { '-std=c23' },     -- Default to C23
+                fallbackFlags = { '-std=c23' }, -- Default to C23
             },
         }
 
