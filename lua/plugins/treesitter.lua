@@ -8,7 +8,7 @@ return {
             "python", "json", "html", "css", "markdown",
             "markdown_inline", "vim", "gitignore", "vimdoc",
             "bash", "sql", "c", "jsx", "yaml", "toml", "regex",
-            "query"
+            "query", "go"
         },
         sync_install = false,
         auto_install = true,
